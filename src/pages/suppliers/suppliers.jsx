@@ -1,9 +1,5 @@
-import "./list.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import Datatable from "../../components/datatable/Datatable";
 import { useEffect, useState } from "react";
-import { TOKEN } from "../../../token";
+import "./suppliers.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,16 +7,30 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, Link } from "react-router-dom";
+import { TOKEN } from "../../../token";
 
-const List = () => {
-  const [employees, setEmployees] = useState([]);
+// fetch(url, {
+//   method: "GET",
+//   headers: headers,
+// })
+//   .then((response) => response.json())
+//   .then((json) => {
+//     console.log("parsed json", json); // access json.body here
+//     setProducts(json);
+//     console.log({ products });
+//   });
+
+const Suppliers = () => {
+  const [suppliers, setSuppliers] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      const url = "http://52.6.84.250/api/v1/employees";
+    const fetchProducts = async () => {
+      const url = "http://127.0.0.1:8000/api/v1/suppliers/";
       const headers = {
         Authorization: `Token  ${TOKEN}`,
         "Content-Type": "application/json",
@@ -33,9 +43,9 @@ const List = () => {
 
       const result = await response.json();
 
-      setEmployees(result);
+      setSuppliers(result);
     };
-    fetchEmployees();
+    fetchProducts();
   }, []);
 
   return (
@@ -43,11 +53,11 @@ const List = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        {employees ? (
+        {suppliers ? (
           <div className="datatable">
             <div className="datatableTitle">
-              Add New Employee
-              <Link to="/employees/new" className="link">
+              Add New Product
+              <Link to="/suppliers/new" className="link">
                 Add New
               </Link>
             </div>
@@ -56,29 +66,36 @@ const List = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell className="tableCell">Name</TableCell>
-                    <TableCell className="tableCell">Phone NUmber</TableCell>
                     <TableCell className="tableCell">Address</TableCell>
-                    <TableCell className="tableCell">Department</TableCell>
-                    <TableCell className="tablecell">Action</TableCell>
+                    <TableCell className="tableCell">Email Address</TableCell>
+                    <TableCell className="tableCell">Phone Number</TableCell>
+                    <TableCell className="tableCell">Products</TableCell>
+                    <TableCell className="tableCell">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {employees.map((row) => (
+                  {suppliers.map((row) => (
                     <TableRow key={row.uuid}>
+                      <TableCell className="tableCell">{row.name}</TableCell>
                       <TableCell className="tableCell">
-                        <span>{row.user.first_name}</span>{" "}
-                        <span>{row.user.last_name}</span>
+                        <div className="cellWrapper">{row.address}</div>
+                      </TableCell>
+                      <TableCell className="tableCell">
+                        {row.email_address}
                       </TableCell>
                       <TableCell className="tableCell">
                         {row.phone_number}
                       </TableCell>
-                      <TableCell className="tableCell">{row.address}</TableCell>
                       <TableCell className="tableCell">
-                        {row.department}
+                        {row.products.length ? (
+                          <div className="cellWrapper">Products</div>
+                        ) : (
+                          <div className="cellWrapper">None</div>
+                        )}
                       </TableCell>
                       <TableCell className="tableCell">
                         <button
-                          onClick={() => navigate(`/employees/${row.uuid}`)}
+                          onClick={() => navigate(`/suppliers/${row.uuid}`)}
                         >
                           View
                         </button>
@@ -97,4 +114,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Suppliers;

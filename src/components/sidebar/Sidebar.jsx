@@ -30,10 +30,10 @@ const Sidebar = () => {
           </Link>
 
           <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/employees" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              <span>Employees</span>
             </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
@@ -42,14 +42,19 @@ const Sidebar = () => {
               <span>Products</span>
             </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
+          <Link to="/suppliers" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalShippingIcon className="icon" />
+              <span>Suppliers</span>
+            </li>
+          </Link>
+          <Link to="/business" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Business</span>
+            </li>
+          </Link>
+
           <p className="title">USEFUL</p>
           <li>
             <InsertChartIcon className="icon" />

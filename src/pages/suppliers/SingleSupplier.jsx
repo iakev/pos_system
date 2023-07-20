@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { TOKEN } from "../../../token";
 
-const SingleProduct = () => {
-  const [product, setProduct] = useState({});
+const SingleSupplier = () => {
+  const [supplier, setSupplier] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const url = `http://52.6.84.250/api/v1/products/${id}`;
+      const url = `http://127.0.0.1:8000/api/v1/suppliers/${id}`;
       const headers = {
         Authorization: `Token  ${TOKEN}`,
         "Content-Type": "application/json",
@@ -23,29 +23,20 @@ const SingleProduct = () => {
 
       const result = await response.json();
 
-      setProduct(result);
+      setSupplier(result);
     };
 
     fetchProduct();
   }, []);
 
-  const {
-    name,
-    category,
-    active_for_sale,
-    description,
-    packaging_unit,
-    limited,
-    tax_type,
-    unit,
-  } = product;
+  const { name, address, email_address, phone_number, products } = supplier;
 
   return (
     <div className="single">
       <Sidebar />
       <div className="singleContainer">
         <Navbar />
-        {product ? (
+        {supplier ? (
           <div className="top">
             <div className="left">
               <div className="editButton">Edit</div>
@@ -54,40 +45,24 @@ const SingleProduct = () => {
                 <div className="details">
                   <h1 className="itemTitle">{name}</h1>
                   <div className="detailItem">
-                    <span className="itemKey">Description:</span>
-                    <span className="itemValue">{description}</span>
+                    <span className="itemKey">Address:</span>
+                    <span className="itemValue">{address}</span>
                   </div>
                   <div className="detailItem">
                     <span className="itemKey">Active for sale:</span>
-                    {active_for_sale ? (
+                    {products?.length ? (
                       <span className="itemValue">True</span>
                     ) : (
                       <span className="itemValue">False</span>
                     )}
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">Category:</span>
-                    <span className="itemValue">{category}</span>
+                    <span className="itemKey">Email Address:</span>
+                    <span className="itemValue">{email_address}</span>
                   </div>
                   <div className="detailItem">
-                    <span className="itemKey">Packaging Unit:</span>
-                    <span className="itemValue">{packaging_unit}</span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Limited:</span>
-                    {limited ? (
-                      <span className="itemValue">True</span>
-                    ) : (
-                      <span className="itemValue">False</span>
-                    )}
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Tax Type:</span>
-                    <span className="itemValue">{tax_type}</span>
-                  </div>
-                  <div className="detailItem">
-                    <span className="itemKey">Unit:</span>
-                    <span className="itemValue">{unit}</span>
+                    <span className="itemKey">Phone Number:</span>
+                    <span className="itemValue">{phone_number}</span>
                   </div>
                 </div>
               </div>
@@ -101,4 +76,4 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+export default SingleSupplier;
