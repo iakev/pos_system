@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, Link } from "react-router-dom";
-import { TOKEN } from "../../../token";
+import { TOKEN } from "../../../../token";
 
 // fetch(url, {
 //   method: "GET",
