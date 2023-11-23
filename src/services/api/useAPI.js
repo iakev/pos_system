@@ -1,0 +1,46 @@
+import { useContext, useCallback } from "react";
+
+import APIContext from "./APIContext";
+import authenticate from "./auth/authenticate";
+import {
+  fetchProducts,
+  fetchSingleProduct,
+  fetchAllSuppliersForProduct,
+  fetchStockForProduct,
+  fetchSalesForProduct,
+  fetchPurchasesForProduct
+} from "./products/fetchProducts";
+
+const services = [
+  authenticate,
+  fetchProducts,
+  fetchSingleProduct,
+  fetchAllSuppliersForProduct,
+  fetchStockForProduct,
+  fetchSalesForProduct,
+  fetchPurchasesForProduct
+]
+
+export const useAPI = () => {
+  const context = useContext(APIContext);
+  if (context === undefined) {
+    throw new Error("useAPI must be used within an APIProvider");
+  }
+
+  // The map method treats the service argument as the entire arrow function 
+  // that's being created. In other words, the arrow 
+  // function (service) => [key, (...args) => service(context, ...args)] 
+  // is constructed within the map method.
+  const bindContext = useCallback((services) => {
+    return Object.fromEntries(Object.entries(services).map(([key, service]) => {
+      return [key, (...args) => service(context, ...args)]
+    }))
+  }, [context]);
+
+  const augmentedContext = {
+    ...context,
+    ...bindContext(services)
+  };
+
+  return augmentedContext;
+}
