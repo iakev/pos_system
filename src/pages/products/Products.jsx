@@ -6,47 +6,90 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useNavigate, Link } from "react-router-dom";
-import { TOKEN } from "../../../token";
-
-// fetch(url, {
-//   method: "GET",
-//   headers: headers,
-// })
-//   .then((response) => response.json())
-//   .then((json) => {
-//     console.log("parsed json", json); // access json.body here
-//     setProducts(json);
-//     console.log({ products });
-//   });
+import { useAPI } from "../../services/api/useAPI";
+import { fetchProducts } from "../../services/api/products/fetchProducts";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const apiContext = useAPI();
   const navigate = useNavigate();
 
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   useEffect(() => {
-    const fetchProducts = async () => {
-      const url = "http://52.6.84.250/api/v1/products/";
-      const headers = {
-        Authorization: `Token  ${TOKEN}`,
-        "Content-Type": "application/json",
-      };
-
-      const response = await fetch(url, {
-        method: "GET",
-        headers: headers,
-      });
-
-      const result = await response.json();
-
-      setProducts(result);
+    const getProducts = async () => {
+      let newProducts;
+      try {
+        newProducts = await fetchProducts(apiContext);
+      } catch (error) {
+        /** Errors should be displayed to the user, e.g. using toast messages. */
+        // err.messages.map((msg) => console.err(msg));
+        console.log("Error fetching products:", error);
+        return;
+      }
+      setProducts(newProducts);
     };
-    fetchProducts();
+    getProducts();
   }, []);
+
+  const columns = [
+    { id: 'category', label: 'Category' },
+    { id: 'name', label: 'Name' },
+    { id: 'code', label: 'Code' },
+    { id: 'description', label: 'Description' },
+    { id: 'limited', label: 'Limited' },
+    { id: 'active_for_sale', label: 'Active for sale' },
+    { id: 'packaging_unit', label: 'Packaging Unit' },
+    { id: 'product_type', label: 'Product Type' },
+    { id: 'unit', label: 'Units' }
+  ];
+
+
+  const columnHeaderElements = columns.map((column) => {
+    return (
+      <TableCell
+        key={column.id}
+        className="header-cell"
+      >
+        {column.label}
+      </TableCell>)
+  });
+
+  const productRowsElements = products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+    .map((productRow) => {
+      return (
+        <TableRow
+          key={productRow.uuid}
+          onClick={() => navigate(`/products/${productRow.uuid}`)}
+          className="rowClickable"
+        >
+          {columns.map((column) => {
+            const upperValue = productRow[column.id];
+            const value = typeof upperValue === 'object' ? upperValue.name : upperValue;
+            return (
+              <TableCell key={`${productRow.uuid}-${column.id}`} className="tableCell">
+                {typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value}
+              </TableCell>
+            )
+          })
+          }
+        </TableRow>
+      )
+    });
 
   return (
     <div className="list">
@@ -62,56 +105,26 @@ const Products = () => {
               </Link>
             </div>
             <TableContainer component={Paper} className="table">
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
+              <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
+                <TableHead className="table-header">
                   <TableRow>
-                    <TableCell className="tableCell">Category</TableCell>
-                    <TableCell className="tableCell">Name</TableCell>
-                    <TableCell className="tableCell">Description</TableCell>
-                    <TableCell className="tableCell">Limited</TableCell>
-                    <TableCell className="tableCell">Active for sale</TableCell>
-                    <TableCell className="tableCell">Packaging Unit</TableCell>
-                    <TableCell className="tableCell">Product Type</TableCell>
-                    <TableCell className="tablecell">Action</TableCell>
+                    {columnHeaderElements}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products?.map((row) => (
-                    <TableRow key={row.uuid}>
-                      <TableCell className="tableCell">
-                        {row.category}
-                      </TableCell>
-                      <TableCell className="tableCell">
-                        <div className="cellWrapper">
-                          {/* <img src={row.img} alt="" className="image" /> */}
-                          {row.name}
-                        </div>
-                      </TableCell>
-                      <TableCell className="tableCell">
-                        {row.description}
-                      </TableCell>
-                      <TableCell className="tableCell">{row.limited}</TableCell>
-                      <TableCell className="tableCell">
-                        {row.active_for_sale}
-                      </TableCell>
-                      <TableCell className="tableCell">
-                        {row.packaging_unit}
-                      </TableCell>
-                      <TableCell className="tableCell">
-                        {row.product_type}
-                      </TableCell>
-                      <TableCell className="tableCell">
-                        <button
-                          onClick={() => navigate(`/products/${row.uuid}`)}
-                        >
-                          View
-                        </button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {products && productRowsElements}
                 </TableBody>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={products.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </div>
         ) : (
           <p>Loading...</p>
