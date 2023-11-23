@@ -1,3 +1,5 @@
+import { useAPI } from "../../services/api/useAPI";
+import Login from "../../components/login/Login";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widget/Widget";
@@ -7,26 +9,35 @@ import Table from "../../components/table/Table";
 import "./home.scss";
 
 const Home = () => {
+  const { user } = useAPI();
   return (
     <div className="home">
-      <Sidebar />
-      <div className="homeContainer">
-        <Navbar />
-        <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+      {user == null ?
+        <div className="homeContainer">
+          <Login />
         </div>
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
-        </div>
-      </div>
+        :
+        <>
+          <Sidebar />
+          <div className="homeContainer">
+            <Navbar />
+            <div className="widgets">
+              <Widget type="user" />
+              <Widget type="order" />
+              <Widget type="earning" />
+              <Widget type="balance" />
+            </div>
+            <div className="charts">
+              <Featured />
+              <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+            </div>
+            <div className="listContainer">
+              <div className="listTitle">Latest Transactions</div>
+              <Table />
+            </div>
+          </div>
+        </>
+      }
     </div>
   );
 };
