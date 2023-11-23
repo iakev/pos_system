@@ -2,7 +2,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { TOKEN } from "../../../token";
+import { TOKEN } from "../../../../token";
 
 const Business = () => {
   const [business, setBusiness] = useState({});
