@@ -3,7 +3,7 @@ import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
-import { TOKEN } from "../../../token";
+import { TOKEN } from "../../../../token";
 import { useLocation } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
