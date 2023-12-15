@@ -5,6 +5,7 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { Link } from "react-router-dom";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
@@ -52,6 +53,12 @@ const Sidebar = () => {
             <li>
               <CreditCardIcon className="icon" />
               <span>Business</span>
+            </li>
+          </Link>
+          <Link to="/inventory" style={{ textDecoration: "none" }}>
+            <li>
+              <InventoryIcon className="icon" />
+              <span>Inventory</span>
             </li>
           </Link>
 

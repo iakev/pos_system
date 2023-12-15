@@ -11,6 +11,8 @@ import {
   fetchPurchasesForProduct
 } from "./products/fetchProducts";
 
+import { fetchStocks, fetchSingleStock, fetchSingleStockMovement } from "./stocks/fetchStocks";
+
 const services = [
   authenticate,
   fetchProducts,
@@ -18,7 +20,10 @@ const services = [
   fetchAllSuppliersForProduct,
   fetchStockForProduct,
   fetchSalesForProduct,
-  fetchPurchasesForProduct
+  fetchPurchasesForProduct,
+  fetchStocks,
+  fetchSingleStock,
+  fetchSingleStockMovement
 ]
 
 export const useAPI = () => {

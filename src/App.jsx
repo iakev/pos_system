@@ -7,6 +7,8 @@ import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { productInputs, userInputs, supplierInputs } from "./formSource";
 import Products from "./pages/products/Products";
+import Inventory from "./pages/inventory/Inventory";
+import InventoryItem from "./pages/inventoryItem/InventoryItem";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
 import SingleEmployee from "./pages/singleEmployee/SingleEmployee";
 import Business from "./pages/business/Business";
@@ -43,6 +45,12 @@ function App() {
               path="/suppliers/new"
               element={<New inputs={supplierInputs} title="Add New Supplier" />}
             />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/inventory/:id" element={<InventoryItem />} />
+            {/* <Route
+              path="/inventory/new"
+              element={<New inputs={inventoryInputs} title="Add New Inventory item" />}
+            /> */}
           </Routes>
         </Router>
       </APIProvider>

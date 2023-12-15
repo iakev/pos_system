@@ -18,7 +18,7 @@ import {
   fetchPurchasesForProduct
 } from "../../services/api/products/fetchProducts";
 import { useAPI } from "../../services/api/useAPI";
-// import { paymentMethodMapping, salesStatusMapping } from "../../mappings";
+import { convertDate } from "../../mappings";
 import "./singleProduct.scss";
 
 
@@ -106,9 +106,6 @@ const SingleProduct = () => {
     "Description",
     "Active for sale",
     "Category",
-    // "Packaging unit",
-    // "Limited",
-    // "Tax type",
     "Unit"
   ];
 
@@ -116,9 +113,6 @@ const SingleProduct = () => {
     "Description": "description",
     "Active for sale": "active_for_sale",
     "Category": "category.name",
-    // "Packaging unit": "packaging_unit",
-    // "Limited": "limited",
-    // "Tax type": "tax_type",
     "Unit": "unit"
   };
 
@@ -291,11 +285,7 @@ const SingleProduct = () => {
                 value = sale?.sale_status || "N/A";
                 break;
               case "created_at":
-                const dateObj = new Date(created_at);
-                value = `${dateObj.getDate().toString().padStart(2, "0")}-${(dateObj.getMonth() + 1)
-                  .toString()
-                  .padStart(2, "0")}
-                -${dateObj.getFullYear()}`;
+                value = convertDate(created_at);
                 break;
               default:
                 value = otherSaleDetails[saleColumn.id] || "N/A";
@@ -314,7 +304,6 @@ const SingleProduct = () => {
     });
 
   // Purchases Table Section
-  // TODO: Have another Table for Purchase History Sections
   const purchaseColumns = [
     { id: "date_of_purchase", label: "Date of Purchase" },
     { id: "supplier", label: "Supplier" },
@@ -365,11 +354,7 @@ const SingleProduct = () => {
                 value = `${firstName} ${lastName}`;
                 break;
               case "date_of_purchase":
-                const dateObj = new Date(date_of_purchase);
-                value = `${dateObj.getDate().toString().padStart(2, "0")}-${(dateObj.getMonth() + 1)
-                  .toString()
-                  .padStart(2, "0")}
-                -${dateObj.getFullYear()}`;
+                value = convertDate(date_of_purchase);
                 break;
               default:
                 value = otherPurchaseDetails[purchaseColumn.id];
@@ -407,7 +392,6 @@ const SingleProduct = () => {
     const rawItemValue = AdditionalinfoMappings[info]
       .split('.')
       .reduce((obj, key) => (obj || {})[key], product);
-    console.log("rawItemvalue is :", rawItemValue);
     const itemValue = rawItemValue === undefined ? `No ${info}` : rawItemValue;
     return (
       <div className="detailItem" key={itemKey}>
