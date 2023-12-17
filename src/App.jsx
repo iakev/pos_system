@@ -1,5 +1,5 @@
-import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 import APIProvider from "./services/api/APIProvider";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
@@ -14,6 +14,8 @@ import SingleEmployee from "./pages/singleEmployee/SingleEmployee";
 import Business from "./pages/business/Business";
 import Suppliers from "./pages/suppliers/suppliers";
 import SingleSupplier from "./pages/suppliers/SingleSupplier";
+import "./App.css";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function App() {
   return (
@@ -54,6 +56,7 @@ function App() {
           </Routes>
         </Router>
       </APIProvider>
+      <ToastContainer />
     </div>
   );
 }
