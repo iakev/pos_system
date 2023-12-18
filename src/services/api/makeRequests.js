@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/v1/';
 const defaultHeaders = {
   "Content-Type": "application/json",
 };
@@ -38,10 +38,7 @@ const makeRequest = async function makeAPIRequest(
       let timeoutError = { message: "Request timed out. Server may be offline." };
       throw timeoutError;
     }
-    // console.error('Error in Axios request:', error);
     let apiError = { message: "An unknown error in hitting REST API" };
-
-    // TODO: to make this better in error handling
     throw apiError;
   }
   return response.data;
