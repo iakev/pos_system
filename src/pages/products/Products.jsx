@@ -96,7 +96,7 @@ const Products = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        {products ? (
+        {products.length > 0 ? (
           <div className="datatable">
             <div className="datatableTitle">
               Add New Product
@@ -112,7 +112,7 @@ const Products = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {products && productRowsElements}
+                  {productRowsElements}
                 </TableBody>
               </Table>
             </TableContainer>
