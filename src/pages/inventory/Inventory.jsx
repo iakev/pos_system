@@ -121,7 +121,7 @@ const Inventory = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        {inventory ? (
+        {inventory.length > 0 ? (
           <div className="datatable">
             <div className="datatableTitle">
               Add To Stock
