@@ -1,8 +1,9 @@
 import makeRequest from "../makeRequests";
+import { toast } from "react-toastify";
 
 const authenticate = async function authenticateService(context, { username, password }) {
   // Question do I need to authenticate and I can get the info from login??
-  const uri = "/api/v1/users/login/";
+  const uri = "users/login/";
   const method = "POST";
   const data = { username, password };
 
@@ -10,7 +11,8 @@ const authenticate = async function authenticateService(context, { username, pas
   try {
     response = await makeRequest(context, uri, { data, method });
   } catch (err) {
-    const authError = { message: `There is a problem in authenticating: ${err}` }
+    const authError = { message: `There is a problem in authenticating: ${err}` };
+    toast.error(authError, { autoClose: 5000 });
     throw authError;
   }
   const accessToken = response.token;
