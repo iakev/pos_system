@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import { convertDate } from "../../mappings";
-
+import "./displayTable.scss";
 
 export default function DisplayTable(props) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -37,7 +37,6 @@ export default function DisplayTable(props) {
       return (
         <TableRow
           key={instance.uuid}
-          className={props.styleClass?.present ? props.styleClass?.name : ""}
         >
           {props.columns.map((column) => {
             let value;
@@ -55,6 +54,7 @@ export default function DisplayTable(props) {
             return (
               <TableCell
                 key={`${instance.uuid}-${column.id}`}
+                className={`status ${column.id === "sale_status" ? instance[column.id] : ""}`}
               >
                 {value}
               </TableCell>
@@ -65,7 +65,7 @@ export default function DisplayTable(props) {
     });
 
   return (
-    <div className="left">
+    <div className="tile">
       <h1 className="title">{props.title}</h1>
       <div className="item">
         <div className="details">

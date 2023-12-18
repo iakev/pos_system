@@ -9,10 +9,7 @@ import {
 
 export default function ProductSales(props) {
   const [productSales, setProductSales] = useState([]);
-  const status = {
-    present: true,
-    name: "status"
-  };
+
   useEffect(() => {
     const getProductSales = async () => {
       const sales = await fetchSalesForProduct(props.context, props.uuid);
@@ -26,7 +23,6 @@ export default function ProductSales(props) {
       instances={productSales}
       title={salesTitle}
       itemTitle={salesItemTitle}
-      styleClass={status}
     />
   )
 }

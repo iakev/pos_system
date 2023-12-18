@@ -40,7 +40,7 @@ const SingleProduct = () => {
       <div className="singleContainer">
         <Navbar />
         {product ? (
-          <div className="top">
+          <div className="page">
             <ProductGeneralInfo
               uuid={id}
               context={apiContext}

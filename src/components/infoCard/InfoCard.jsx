@@ -1,4 +1,5 @@
 import React from "react";
+import "./infoCard.scss"
 
 export default function InfoCard(props) {
   const getTotalCost = () => {
@@ -23,8 +24,7 @@ export default function InfoCard(props) {
   });
 
   return (
-    <div className="left">
-      <div className="editButton">Edit</div>
+    <div className="tile">
       <h1 className="title">{props.title}</h1>
       <div className="item">
         <div className="details">

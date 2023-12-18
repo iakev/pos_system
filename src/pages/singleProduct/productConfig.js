@@ -21,7 +21,7 @@ const logisticColumns = [
   { id: 'address', label: 'Address' },
   { id: 'email_address', label: 'Email Address' },
   { id: 'phone_number', label: 'Phone Number' },
-  { id: 'lead_time', label: 'Lead Time (Business Days)' },
+  { id: 'lead_time', label: 'Lead Time' },
 ];
 
 // Inventory information section
