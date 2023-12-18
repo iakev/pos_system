@@ -39,7 +39,7 @@ const SingleProduct = () => {
       <Sidebar />
       <div className="singleContainer">
         <Navbar />
-        {product ? (
+        {Object.keys(product).length > 0 ? (
           <div className="page">
             <ProductGeneralInfo
               uuid={id}
