@@ -1,5 +1,5 @@
 import { useAPI } from "../../services/api/useAPI";
-import Login from "../../components/login/Login";
+import Login from "../login/Login";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widget/Widget";
