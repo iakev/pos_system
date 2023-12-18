@@ -35,7 +35,7 @@ const fetchSingleStockMovement = async function fetchSingleStockMovementService(
     stockMovement = await makeRequest(context, uri, { method });
   } catch (error) {
     const getStockMovementError = { mesage: ("There is a problem in getting the stock movement:", error) };
-    toast.error(getStockgetStockMovementErrorError, { autoClose: 5000 });
+    toast.error(getStockMovementError, { autoClose: 5000 });
   }
   return stockMovement;
 }
