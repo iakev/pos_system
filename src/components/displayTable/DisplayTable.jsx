@@ -26,6 +26,7 @@ export default function DisplayTable(props) {
     return (
       <TableCell
         key={column.id}
+        className="header-cell"
       >
         {column.label}
       </TableCell>
@@ -37,9 +38,11 @@ export default function DisplayTable(props) {
       return (
         <TableRow
           key={instance.uuid}
+          className="rowClickable"
         >
           {props.columns.map((column) => {
             let value;
+            let statusClass;
             switch (column.id) {
               case "created_at":
                 value = convertDate(instance[column.id]);
@@ -51,12 +54,15 @@ export default function DisplayTable(props) {
                 value = instance?.[column.id] || "N/A";
                 break;
             }
+            if (column.id === "sale_status") {
+              statusClass = instance[column.id].substring(0, 1) + instance[column.id].substring(1).toLowerCase().replaceAll(' ', '_');
+            }
             return (
               <TableCell
                 key={`${instance.uuid}-${column.id}`}
-                className={`status ${column.id === "sale_status" ? instance[column.id] : ""}`}
+                className="tableCell"
               >
-                {value}
+                {column.id === "sale_status" ? <span className={`status ${statusClass}`}>{value}</span> : value}
               </TableCell>
             )
           })}
