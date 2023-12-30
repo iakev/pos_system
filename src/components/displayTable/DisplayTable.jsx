@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 import { convertDate } from "../../mappings";
 import "./displayTable.scss";
 
@@ -22,23 +23,34 @@ export default function DisplayTable(props) {
     setCurrentPage(0);
   };
 
-  const columnHeaderElements = props.columns.map((column) => {
-    return (
-      <TableCell
-        key={column.id}
-        className="header-cell"
-      >
-        {column.label}
+  const columnHeaderElements = (
+    <TableRow>
+      {props.columns.map((column) => {
+        return (
+          <TableCell
+            key={column.id}
+            className="header-cell"
+          >
+            {column.label}
+          </TableCell>
+        )
+      })
+      }
+      <TableCell className="header-cell">
+        Action
       </TableCell>
-    )
-  });
+    </TableRow>
+  );
 
   const RowElements = props.instances.slice(currentPage * currentRowsPerPage, currentPage * currentRowsPerPage + currentRowsPerPage)
     .map((instance) => {
       return (
         <TableRow
           key={instance.uuid}
-          className="rowClickable"
+          hover={true}
+          sx={{
+            cursor: "pointer",
+          }}
         >
           {props.columns.map((column) => {
             let value;
@@ -50,8 +62,13 @@ export default function DisplayTable(props) {
               case "updated_at":
                 value = convertDate(instance[column.id]);
                 break;
+              case "employee.user":
+                const rawVal = column.id.split('.').reduce((obj, key) => (obj || {})[key], instance);
+                value = `${rawVal.first_name} ${rawVal.last_name}`;
+                break;
               default:
-                value = instance?.[column.id] || "N/A";
+                const rawValue = column.id.split('.').reduce((obj, key) => (obj || {})[key], instance);
+                value = typeof rawValue === 'boolean' ? (rawValue ? "Yes" : "No") : rawValue || "N/A";
                 break;
             }
             if (column.id === "sale_status") {
@@ -66,6 +83,16 @@ export default function DisplayTable(props) {
               </TableCell>
             )
           })}
+          <TableCell className="tableCell">
+            <Button // this should be a dropdown of the various actions
+              variant="contained"
+              color="primary"
+              size="small"
+            // onClick={() => navigate(`/suppliers/${row.uuid}`)}
+            >
+              View
+            </Button>
+          </TableCell>
         </TableRow>
       )
     });
@@ -79,9 +106,7 @@ export default function DisplayTable(props) {
           <TableContainer component={Paper} className="table">
             <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
               <TableHead className="table-header">
-                <TableRow>
-                  {columnHeaderElements}
-                </TableRow>
+                {columnHeaderElements}
               </TableHead>
               <TableBody>
                 {props.instances && RowElements}
