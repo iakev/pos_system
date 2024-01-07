@@ -6,12 +6,10 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import InventoryIcon from '@mui/icons-material/Inventory';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import { Link } from "react-router-dom";
-// import { DarkModeContext } from "../../context/darkModeContext";
-// import { useContext } from "react";
 
 const Sidebar = () => {
-  //   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
@@ -55,6 +53,12 @@ const Sidebar = () => {
               <span>Business</span>
             </li>
           </Link>
+          <Link to="/sales" style={{ textDecoration: "none" }}>
+            <li>
+              <PointOfSaleIcon className="icon" />
+              <span>Sales</span>
+            </li>
+          </Link>
           <Link to="/inventory" style={{ textDecoration: "none" }}>
             <li>
               <InventoryIcon className="icon" />
@@ -69,16 +73,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      {/* <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div> */}
     </div>
   );
 };
