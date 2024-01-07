@@ -4,7 +4,7 @@ import {
   stockTitle,
   stockInfoArr,
   stockInfoArrMappings
-} from "../../../pages/inventoryItem/inventoryConfig";
+} from "../../../pages/inventory/inventoryConfig";
 
 export default function InventoryInfo(props) {
   return (
