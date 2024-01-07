@@ -10,6 +10,7 @@ import TablePagination from "@mui/material/TablePagination";
 import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import LinearIndeterminate from "../../components/loadingComponents/linearProgress/LinearIndeterminate";
 import { useNavigate, Link } from "react-router-dom";
 import { useAPI } from "../../services/api/useAPI";
 import { fetchStocks } from "../../services/api/stocks/fetchStocks";
@@ -152,7 +153,7 @@ const Inventory = () => {
             />
           </div>
         ) : (
-          <p>Loading...</p>
+          <LinearIndeterminate />
         )}
       </div>
     </div>
