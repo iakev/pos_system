@@ -5,7 +5,7 @@ import {
   stockMovementColumns,
   stockMovementTitle,
   stockMovementItemTitle
-} from "../../../pages/inventoryItem/inventoryConfig";
+} from "../../../pages/inventory/inventoryConfig";
 
 export default function StockMovement(props) {
   const [stockMovement, setStockMovement] = useState([]);
