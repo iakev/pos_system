@@ -1,7 +1,9 @@
+import axios from "axios";
 import makeRequest from "../makeRequests";
 import { toast } from "react-toastify";
+import { persistTokenToStorage, persistUserToStorage } from "../../utils/storageUtils";
 
-const authenticate = async function authenticateService(context, { username, password }) {
+export const authenticate = async function authenticateService(context, { username, password }) {
   // Question do I need to authenticate and I can get the info from login??
   const uri = "users/login/";
   const method = "POST";
@@ -15,11 +17,43 @@ const authenticate = async function authenticateService(context, { username, pas
     toast.error(authError, { autoClose: 5000 });
     throw authError;
   }
-  const accessToken = response.token;
-  const user = response.user;
+  const tokenObj = response.token || {};
+  const accessToken = tokenObj.access;
+  const refreshToken = tokenObj.refresh;
   context.setAccessToken(accessToken);
+  context.setRefreshToken(refreshToken);
+  persistTokenToStorage("accessToken", accessToken);
+  persistTokenToStorage("refreshToken", refreshToken);
+  const user = response.user;
   context.setUser(user);
-  return null;
+  persistUserToStorage(user);
 };
 
-export default authenticate;
+export const silentRefresh = async (context, refreshToken) => {
+  const uri = "users/refresh_token/"
+  const method = "POST";
+  const data = { refresh: refreshToken };
+  try {
+    const response = await axios({
+      method,
+      url: uri,
+      data,
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    const newAccessToken = response.data.access;
+    context.setAccessToken(newAccessToken);
+    persistTokenToStorage("accessToken", newAccessToken);
+    return newAccessToken;
+  } catch (err) {
+    const refreshError = { message: `Error during silent refresh: ${err}` };
+    context.clearTokens();
+    toast.error(refreshError, { autoClose: 5000 });
+    throw refreshError;
+  }
+};
+
+
+
+
