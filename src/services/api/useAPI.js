@@ -1,7 +1,7 @@
 import { useContext, useCallback } from "react";
 
 import APIContext from "./APIContext";
-import authenticate from "./auth/authenticate";
+import { authenticate, silentRefresh } from "./auth/authenticate";
 import {
   fetchProducts,
   fetchSingleProduct,
@@ -15,6 +15,7 @@ import { fetchStocks, fetchSingleStock, fetchSingleStockMovement } from "./stock
 
 const services = [
   authenticate,
+  silentRefresh,
   fetchProducts,
   fetchSingleProduct,
   fetchAllSuppliersForProduct,
