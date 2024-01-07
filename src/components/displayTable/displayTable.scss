@@ -1,8 +1,7 @@
 .tile {
-  flex: 1;
-  position: relative;
   padding: 20px;
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  height: 100%;
 
   & .item {
     display: flex;
@@ -15,14 +14,6 @@
       }
 
       .table {
-        .rowClickable {
-          cursor: pointer;
-        }
-
-        .rowClickable:hover {
-          background-color: #f0f0f0;
-        }
-
         .table-header {
           background-color: #333;
         }
