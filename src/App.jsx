@@ -1,3 +1,5 @@
+import React from "react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import APIProvider from "./services/api/APIProvider";
@@ -8,21 +10,27 @@ import New from "./pages/new/New";
 import { productInputs, userInputs, supplierInputs } from "./formSource";
 import Products from "./pages/products/Products";
 import Inventory from "./pages/inventory/Inventory";
-import InventoryItem from "./pages/inventoryItem/InventoryItem";
-import SingleProduct from "./pages/singleProduct/SingleProduct";
+import InventoryItem from "./pages/inventory/InventoryItem";
+import SingleProduct from "./pages/products/SingleProduct";
 import SingleEmployee from "./pages/singleEmployee/SingleEmployee";
 import Business from "./pages/business/Business";
-import Suppliers from "./pages/suppliers/suppliers";
+import Suppliers from "./pages/suppliers/Suppliers";
 import SingleSupplier from "./pages/suppliers/SingleSupplier";
+import Sales from "./pages/sales/Sales";
+import { useThemeContext } from "./theme/ThemeContextProvider";
 import "./App.css";
 import 'react-toastify/dist/ReactToastify.min.css';
+import Login from "./pages/login/Login";
 
 function App() {
+  const { theme } = useThemeContext();
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <APIProvider>
         <Router>
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
             <Route path="/employees" element={<List />} />
             <Route path="/employees/:id" element={<SingleEmployee />} />
@@ -53,11 +61,12 @@ function App() {
               path="/inventory/new"
               element={<New inputs={inventoryInputs} title="Add New Inventory item" />}
             /> */}
+            <Route path="/sales" element={<Sales />} />
           </Routes>
         </Router>
       </APIProvider>
       <ToastContainer />
-    </div>
+    </ThemeProvider>
   );
 }
 
