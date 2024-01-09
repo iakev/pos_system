@@ -41,7 +41,7 @@ export default function DisplayTable(props) {
       </TableCell>
     </TableRow>
   );
-
+      // TODO: pagination to be handled on backend
   const RowElements = props.instances.slice(currentPage * currentRowsPerPage, currentPage * currentRowsPerPage + currentRowsPerPage)
     .map((instance) => {
       return (

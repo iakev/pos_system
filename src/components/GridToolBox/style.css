@@ -1,0 +1,273 @@
+@import './default-config.css';
+@import 'config.css';
+
+.toolbarWrap {
+    width: 100%;
+    overflow: hidden;
+}
+
+.fixedHeight {
+    height: 55px;
+}
+
+.table {
+    display: flex;
+    align-items: center;
+}
+
+.toolbarElementsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.tableButtonsShowed {
+    justify-content: space-between;
+}
+
+.toolbarWrap>div,
+.tableCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.toolbarWrap .toolbarElement {
+    padding-right: 20px;
+}
+
+.toolbarWrap .toolbarElement:last-child {
+    padding-right: 0;
+}
+
+.toolbarWrap .label {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.toolbarWrap .link {
+    color: var(--ut-front-react-standardGridToolBoxToolbarWrapLinkColor);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.toolbarWrap .link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.toolbarWrap .pullRight {
+    float: right;
+    text-align: right;
+}
+
+.toolbarWrap .noRightMargin {
+    margin-right: 0;
+}
+
+.toolbarWrap .closeArrow, .advancedSearchIcon, .searchIcon {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--ut-front-react-standardGridToolBoxBorderColor);
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.toolbarWrap .closeArrow {
+    background-color: var(--ut-front-react-standardGridToolBoxCloseArrowBackgroundColor);
+    background-image: url('./images/clearfilters-arrow.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.advancedSearchIconWrapper {
+    width: auto;
+    height: 30px;
+}
+
+.advancedSearchIcon {
+    background-color: var(--ut-front-react-standardGridToolBoxAdvancedSearchIconBackgroundColor);
+    display: flex;
+}
+
+/* .barWrap {
+    width: 60%;
+    margin: auto;
+}
+
+.barWrap .bar {
+    border-top: 2px solid white;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.barWrap .bar:last-child {
+    margin-bottom: 0;
+} */
+
+.searchIcon {
+    background-color: var(--ut-front-react-standardGridToolBoxAdvancedSearchIconBackgroundColor);
+    background-image: url('./images/search.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.toolbarWrap .closeArrow:hover {
+    background-color: var(--ut-front-react-standardGridToolBoxCloseArrowHoverBackgroundColor);
+}
+
+.toolbarWrap .leftFloat {
+    text-align: left;
+}
+
+.advancedSearchPopOver {
+    visibility: hidden;
+    position: absolute;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    z-index: 1;
+    padding: 5px;
+    text-align: left;
+}
+
+.advancedSearchIcon:hover ~ .advancedSearchPopOver{
+    visibility: visible;
+}
+
+.advancedSearchInputWrapper {
+    width: 70%;
+    text-align: left;
+    margin: 5px auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.spacer {
+    padding-right: 10px;
+}
+
+.spacer:last-child {
+    padding-right: 0px;
+}
+
+.filterActionWrap {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.filterActionWrap button {
+    float: right;
+}
+
+@media only screen and (min-device-width: 280px) and (max-device-width:  1365px) {
+    .toolbarWrap .minWidthed {
+        min-width: auto;
+    }
+
+    .table {
+        padding-top: 10px;
+    }
+  }
+
+
+@media only screen and (min-device-width: 930px) and (max-device-width:  1365px) {
+    .toolbarWrap .minWidthed {
+        min-width: auto;
+    }
+
+    .table {
+        height: auto;
+        padding-top: 10px;
+        flex-direction: column;
+        padding-bottom: 10px;
+    }
+
+    .toolbarWrap .toolbarElement {
+        padding-bottom: 10px;
+    }
+
+    .toolbarElementsContainer {
+        display: flex;
+        flex-direction: row;
+    }
+  }
+
+  @media only screen and (min-device-width: 670px) and (max-device-width: 929px) {
+    .table {
+        height: auto;
+        padding-bottom: 10px;
+        flex-direction: column;
+    }
+
+    .toolbarWrap .toolbarElement {
+        padding-right: 0px;
+        padding-bottom: 10px;
+    }
+
+    .toolbarElementsContainer {
+        flex-direction: column;
+        height: auto;
+    }
+
+  }
+
+
+  @media only screen and (min-device-width: 280px) and (max-device-width: 669px) {
+    .toolbarWrap .toolbarElement {
+        padding-right: 0px;
+        padding-bottom: 10px;
+    }
+
+    .toolbarElementsContainer {
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+@media only screen and (min-device-width: 280px) and (max-device-width: 420px) {
+    .table {
+        width: 55%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 5px;
+    }
+}
+
+@media only screen and (min-device-width: 421px) and (max-device-width: 429px) {
+    .table {
+        width: 48%;
+        height: auto;
+        flex-direction: column;
+        padding-bottom: 5px;
+    }
+
+    .toolbarWrap .pullRight {
+text-align: -webkit-center;
+    }
+}
+
+
+@media only screen and (min-device-width: 430px) and (max-device-width: 589px) {
+    .table {
+        width: 70%;
+        height: auto;
+        flex-direction: column;
+        padding-bottom: 5px;
+    }
+
+    .toolbarWrap .pullRight {
+        text-align: -webkit-center;
+            }
+}
+
+@media only screen and (min-device-width: 590px) and (max-device-width: 669px) {
+    .table {
+        width: 80%;
+        height: auto;
+        flex-direction: column;
+        padding-bottom: 5px;
+    }
+}

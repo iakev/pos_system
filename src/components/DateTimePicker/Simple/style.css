@@ -1,0 +1,112 @@
+@import './default-config.css';
+@import 'config.css';
+
+.outerWrap,
+.outerWrapNoLabel,
+.innerWrap,
+.innerWrapTP,
+.inputWrap,
+.labelWrap,
+.labelWrapTP {
+    display: flex;
+}
+
+.outerWrap {
+    justify-content: space-between;
+    color: #595959;
+}
+
+.outerWrapNoLabel {
+    justify-content: flex-end;
+}
+
+.innerWrap {
+    width: auto;
+}
+
+.innerWrapTP {
+    width: 70%;
+    align-self: center;
+}
+
+.innerWrapCombinedLabel {
+    width: 60%;
+    align-self: center;
+}
+
+.innerWrapCombined {
+    width: 12rem;
+    align-self: center;
+}
+
+.labelWrap,
+.labelWrapTP {
+    font-size: 14px;
+    text-align: left;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.labelWrapTP {
+    width: 30%;
+    margin-right: 0;
+}
+
+.boldLabel {
+    font-weight: bold;
+}
+
+.inputWrap, .inputWrapTP {
+    border: 1px solid #D7D6D6;
+    position: relative;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputWrap:nth-child(1), .inputWrapTP:nth-child(1) {
+    margin-right: 5px;
+}
+
+.inputWrap:nth-child(2), .inputWrapTP:nth-child(2) {
+    margin-left: 5px;    
+}
+
+.inputWrap input {
+    width: 100%;
+    padding: 4px 36px 4px 10px;
+    border: none;
+    height: 28px;
+}
+
+.inputWrapTP input {
+    width: 100%;
+    padding: 4px 36px 6px 10px;
+    border: none;
+    height: auto;
+}
+
+.inputWrap button.dateButton, .inputWrap button.timeButton, .inputWrapTP button.dateButton, .inputWrapTP button.timeButton {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    border: none;
+    background: var(--ut-front-react-standardDateTimePickerBackgroundColor);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.inputWrap button.dateButton, .inputWrapTP button.dateButton {
+    background-image: url('./images/calendar.png');
+}
+
+.inputWrap button.timeButton, .inputWrapTP button.timeButton {
+    background-image: url('./images/clock.png');
+}
+.ddframe {
+    width: 50%;
+    min-width: 80px;
+}
