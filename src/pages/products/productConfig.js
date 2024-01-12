@@ -86,6 +86,18 @@ const additionalinfoMappings = {
   "Product Type": "product_type"
 };
 
+const productsGridColumns = [
+  { id: 'category', label: 'Category' },
+  { id: 'name', label: 'Name' },
+  { id: 'code', label: 'Code' },
+  { id: 'description', label: 'Description' },
+  { id: 'limited', label: 'Limited' },
+  { id: 'active_for_sale', label: 'Active for sale' },
+  { id: 'packaging_unit', label: 'Packaging Unit' },
+  { id: 'product_type', label: 'Product Type' },
+  { id: 'unit', label: 'Units' }
+];
+
 export {
   generalInfoArr,
   generalInfoMappings,
@@ -104,5 +116,6 @@ export {
   purchaseColumns,
   additionalInfoArr,
   additionalinfoMappings,
-  aditionalTitle
+  aditionalTitle,
+  productsGridColumns
 };
